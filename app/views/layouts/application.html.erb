@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -17,18 +18,34 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
-    <p class="navbar-text float-right">
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
-    </p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">The Bank App</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <!--Links to be added -->
+              <a class="nav-link" href="">My account</a>
+            </li>
+          </ul>
+          <p class="navbar-text float-right">
+            <% if user_signed_in? %>
+              Logged in as <strong><%= current_user.email %></strong>
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </nav>
 
-    <%= yield %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
 
   </body>
 </html>
